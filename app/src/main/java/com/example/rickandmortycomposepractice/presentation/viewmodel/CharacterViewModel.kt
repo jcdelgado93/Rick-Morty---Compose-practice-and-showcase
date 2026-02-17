@@ -35,10 +35,10 @@ class CharacterViewModel(
 
         viewModelScope.launch {
             try {
-                val result = repository.getCharacters(query)
+                val characterResults = repository.getCharacters(query)
                 _uiState.update {
                     it.copy(
-                        characters = result,
+                        characters = characterResults.results,
                         isLoading = false
                     )
                 }

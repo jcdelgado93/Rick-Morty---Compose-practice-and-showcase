@@ -1,27 +1,30 @@
 package com.example.rickandmortycomposepractice.data.repository
 
 import android.util.Log
-import com.example.rickandmortycomposepractice.domain.model.Character
 import com.example.rickandmortycomposepractice.data.network.RetrofitInstance
+import com.example.rickandmortycomposepractice.domain.model.CharacterResponse
+import com.example.rickandmortycomposepractice.domain.model.Character
+import com.example.rickandmortycomposepractice.domain.model.toCharacterDomain
+import com.example.rickandmortycomposepractice.domain.model.toCharacterResponseDomain
 import com.example.rickandmortycomposepractice.domain.repository.CharacterRepository
 
 class CharacterRepositoryImpl : CharacterRepository {
 
     private val api = RetrofitInstance.api
 
-    override suspend fun getCharacters(name: String): List<Character> {
+    override suspend fun getCharacters(name: String): CharacterResponse {
         return try {
             val response = api.getCharacters(name)
-            response.results
+            response.toCharacterResponseDomain()
         } catch (e: Exception) {
             Log.e("CharacterRepository", "Error fetching characters: ${e.message}")
-            emptyList()
+            CharacterResponse(emptyList())
         }
     }
 
     override suspend fun getCharacterById(id: Int): Character? {
         return try {
-            api.getCharacter(id)
+            api.getCharacter(id).toCharacterDomain()
         } catch (_: Exception) {
             null
         }
