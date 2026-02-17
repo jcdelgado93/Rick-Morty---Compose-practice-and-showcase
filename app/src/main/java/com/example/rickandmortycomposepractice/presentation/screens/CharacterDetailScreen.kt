@@ -21,15 +21,18 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.example.rickandmortycomposepractice.presentation.viewmodel.CharacterViewModel
 
 @Composable
 fun CharacterDetailScreen(
     characterId: Int,
-    viewModel: CharacterViewModel,
     onBackClick: () -> Unit
 ) {
+
+    val viewModel: CharacterViewModel = hiltViewModel()
+
     LaunchedEffect(Unit) {
         viewModel.selectCharacter(characterId)
     }

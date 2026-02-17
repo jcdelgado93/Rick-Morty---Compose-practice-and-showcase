@@ -1,16 +1,17 @@
 package com.example.rickandmortycomposepractice.data.repository
 
 import android.util.Log
-import com.example.rickandmortycomposepractice.data.network.RetrofitInstance
+import com.example.rickandmortycomposepractice.data.network.RickAndMortyApi
 import com.example.rickandmortycomposepractice.domain.model.CharacterResponse
 import com.example.rickandmortycomposepractice.domain.model.Character
 import com.example.rickandmortycomposepractice.domain.model.toCharacterDomain
 import com.example.rickandmortycomposepractice.domain.model.toCharacterResponseDomain
 import com.example.rickandmortycomposepractice.domain.repository.CharacterRepository
+import javax.inject.Inject
 
-class CharacterRepositoryImpl : CharacterRepository {
-
-    private val api = RetrofitInstance.api
+class CharacterRepositoryImpl @Inject constructor(
+    private val api : RickAndMortyApi
+) : CharacterRepository {
 
     override suspend fun getCharacters(name: String): CharacterResponse {
         return try {

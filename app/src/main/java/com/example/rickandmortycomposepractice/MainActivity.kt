@@ -10,7 +10,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.rickandmortycomposepractice.presentation.screens.CharacterDetailScreen
 import com.example.rickandmortycomposepractice.presentation.screens.CharacterListScreen
-import com.example.rickandmortycomposepractice.presentation.viewmodel.CharacterViewModel
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +17,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.rickandmortycomposepractice.ui.theme.RickAndMortyComposePracticeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +36,6 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     val navController = rememberNavController()
-                    val viewModel: CharacterViewModel = hiltViewModel()
 
                     NavHost(
                         navController = navController,
@@ -70,7 +67,6 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("list") {
                             CharacterListScreen(
-                                viewModel = viewModel,
                                 onCharacterClick = { characterId ->
                                     navController.navigate("detail/$characterId")
                                 }
@@ -87,7 +83,6 @@ class MainActivity : ComponentActivity() {
 
                             CharacterDetailScreen(
                                 characterId = characterId,
-                                viewModel = viewModel,
                                 onBackClick = { navController.popBackStack() }
                             )
                         }
