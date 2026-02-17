@@ -5,11 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.rickandmortycomposepractice.domain.model.Character
 import com.example.rickandmortycomposepractice.domain.repository.CharacterRepository
 import com.example.rickandmortycomposepractice.data.repository.CharacterRepositoryImpl
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class CharactersUiState(
     val characters: List<Character> = emptyList(),
@@ -19,10 +21,10 @@ data class CharactersUiState(
     val selectedCharacter: Character? = null
 )
 
-class CharacterViewModel(
-    private val repository: CharacterRepository = CharacterRepositoryImpl()
-) : ViewModel() {
+@HiltViewModel
+class CharacterViewModel @Inject constructor() : ViewModel() {
 
+    private val repository: CharacterRepository = CharacterRepositoryImpl()
     private val _uiState = MutableStateFlow(CharactersUiState())
     val uiState: StateFlow<CharactersUiState> = _uiState.asStateFlow()
 
