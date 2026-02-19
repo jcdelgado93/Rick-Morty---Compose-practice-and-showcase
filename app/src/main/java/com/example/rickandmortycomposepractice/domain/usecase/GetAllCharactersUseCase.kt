@@ -3,8 +3,8 @@ package com.example.rickandmortycomposepractice.domain.usecase
 import com.example.rickandmortycomposepractice.domain.repository.CharacterRepository
 import javax.inject.Inject
 
-class GetCharactersByNameUseCase @Inject constructor(
+class GetAllCharactersUseCase @Inject constructor(
     private val repository: CharacterRepository
 ) {
-    operator fun invoke(name: String) = repository.getCharactersByName(name)
+    operator fun invoke() = repository.getAllCharacters()
 }

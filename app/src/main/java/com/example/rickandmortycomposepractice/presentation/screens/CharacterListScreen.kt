@@ -42,7 +42,7 @@ fun CharacterListScreen(
             ) {
                 TextField(
                     value = uiState.searchTerm,
-                    onValueChange = { viewModel.searchCharacters(it) },
+                    onValueChange = { viewModel.searchCharactersByName(it) },
                     placeholder = { Text("Buscar...", color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)) },
                     leadingIcon = {
                         Icon(

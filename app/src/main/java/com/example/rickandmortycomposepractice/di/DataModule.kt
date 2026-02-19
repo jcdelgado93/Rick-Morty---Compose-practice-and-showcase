@@ -1,6 +1,7 @@
-package com.example.rickandmortycomposepractice.data.di
+package com.example.rickandmortycomposepractice.di
 
-import com.example.rickandmortycomposepractice.data.network.RickAndMortyApi
+import com.example.rickandmortycomposepractice.data.local.dao.CharacterDao
+import com.example.rickandmortycomposepractice.data.remote.api.RickAndMortyApi
 import com.example.rickandmortycomposepractice.data.repository.CharacterRepositoryImpl
 import com.example.rickandmortycomposepractice.domain.repository.CharacterRepository
 import dagger.Module
@@ -11,11 +12,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RemoteDataModule {
+object DataModule {
 
     @Singleton
     @Provides
-    fun provideCharacterRepository(api : RickAndMortyApi): CharacterRepository {
-        return CharacterRepositoryImpl(api)
+    fun provideCharacterRepository(dao: CharacterDao, api: RickAndMortyApi): CharacterRepository {
+        return CharacterRepositoryImpl(dao, api)
     }
 }

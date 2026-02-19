@@ -1,6 +1,6 @@
-package com.example.rickandmortycomposepractice.data.di
+package com.example.rickandmortycomposepractice.di
 
-import com.example.rickandmortycomposepractice.data.network.RickAndMortyApi
+import com.example.rickandmortycomposepractice.data.remote.api.RickAndMortyApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+object RemoteModule {
 
     @Singleton
     @Provides

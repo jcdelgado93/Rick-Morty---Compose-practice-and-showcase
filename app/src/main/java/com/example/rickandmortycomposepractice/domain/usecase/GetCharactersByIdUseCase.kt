@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetCharactersByIdUseCase @Inject constructor(
     private val repository: CharacterRepository
 ) {
-    suspend operator fun invoke(id: Int) = repository.getCharacterById(id)
+    operator fun invoke(id: Int) = repository.getCharacterById(id)
 }
